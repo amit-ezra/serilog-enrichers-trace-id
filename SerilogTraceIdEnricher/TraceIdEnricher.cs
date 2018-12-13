@@ -6,7 +6,7 @@ namespace Serilog.Enrichers
 {
   public class TraceIdEnricher : ILogEventEnricher
   {
-    private const string propertyName = "TraceId";
+    public const string PropertyName = "TraceId";
     private readonly IHttpContextAccessor httpContextAccessor;
 
     public TraceIdEnricher()
@@ -24,7 +24,7 @@ namespace Serilog.Enrichers
       var traceId = GetTraceId();
       if (!string.IsNullOrWhiteSpace(traceId))
       {
-        var correlationIdProperty = new LogEventProperty(propertyName, new ScalarValue(traceId));
+        var correlationIdProperty = new LogEventProperty(PropertyName, new ScalarValue(traceId));
         logEvent.AddOrUpdateProperty(correlationIdProperty);
       }
     }
